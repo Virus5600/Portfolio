@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// COOKIE RELATED
+Route::post('/cookie/set', 'CookieController@setCookie')->name('set-cookie');
+Route::post('/cookie/get', 'CookieController@getCookie')->name('get-cookie');
+Route::post('/cookie/delete', 'CookieController@deleteCookie')->name('del-cookie');
+
+// HOME PAGE
+Route::get('/', 'PageController@index')->name('home');
