@@ -13,4 +13,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/style-dark.scss', 'public/css')
+    .sass('resources/sass/style-light.scss', 'public/css')
+    .sass('resources/sass/style-general.scss', 'public/css')
+    .sourceMaps(true, 'source-map');

@@ -1,0 +1,19 @@
+// MAPS
+@import 'style-variables';
+
+// MIXINS
+@import 'style-mixins';
+
+// BG COLORS
+@each $color, $value in $colors-general {
+	.bg-#{$color} {
+		background-color: $value;
+	}
+}
+
+// CURSORS (WITH BREAKPOINTS)
+@each $breakpoint, $value in $breakpoints {
+	@each $value in $cursor-general {
+		@include breakpoint("cursor", $value, "cursor", $breakpoint);
+	}
+}

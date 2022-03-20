@@ -56,9 +56,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
 		@endif
 
-		{{-- jQuery Cookie 1.4.1 --}}
-		<script src="{{ asset('lib/jquery-cookie/jquery.cookie.js') }}"></script>
-
 		{{-- Sweet Alert 2 --}}
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -70,10 +67,24 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 		
 		{{-- FontAwesome --}}
-		<script src="https://kit.fontawesome.com/f67ab1f0a2.js" crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/d4492f0e4d.js" crossorigin="anonymous"></script>
+
+		{{-- ROOT --}}
+		<style type="text/css">
+			:root {
+				/* FONTS */
+				--nasalization-rg: url("{{ asset('fonts/nasalization rg.otf') }}");
+			}
+		</style>
+
+		{{-- Fonts --}}
+		<link rel="stylesheet" href="{{ asset('css/fonts/nasalization.css') }}">
 
 		{{-- Custom CSS --}}
-		{{-- <link rel="stylesheet" href="{{ mix('/css/app.css') }}"> --}}
+		{{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
+		<link rel="stylesheet" type="text/css" href="{{ mix('css/style-' . (Cookie::get('is_dark') === 'true' ? 'dark' : 'light') . '.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ mix('css/style-general.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/custom/user.css') }}">
 		@yield('css')
 
 		{{-- Favicon --}}
@@ -112,7 +123,12 @@
 		{{-- Vue.js --}}
 		<script src="{{ mix('/js/app.js') }}"></script>
 
+		{{-- cookies.js 1.0 --}}
+		<script src="{{ asset('js/cookies.js') }}"></script>
+		{{-- transform-css 1.0 --}}
+		<script src="{{ asset('js/transform-css.js') }}"></script>
 		{{-- Custom Scripts --}}
+		<script src="{{ asset('js/user.js') }}"></script>
 		@yield('scripts')
 	</body>
 </html>

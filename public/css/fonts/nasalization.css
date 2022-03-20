@@ -1,0 +1,9 @@
+@font-face {
+	font-family: Nasalization;
+	src: var(--nasalization-rg);
+	font-style: normal;
+}
+
+.font-nasalization-rg {
+	font-family: Nasalization;
+}

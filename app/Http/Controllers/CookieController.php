@@ -23,7 +23,7 @@ class CookieController extends Controller
 		else
 			$cookie = Cookie::make($req->cookie_name, $req->cookie_val, $minutes);
 
-		if ($req->has('view'))
+		if ($req->has('view') && $req->view != null)
 			return response()
 				->view($req->view)
 				->json([$req->cookie_name => $req->cookie_val], 200)
@@ -43,9 +43,7 @@ class CookieController extends Controller
 		else
 			$cookie = Cookie::get($req->cookie_name);
 
-		Log::info($cookie);
-
-		if ($req->has('view')) {
+		if ($req->has('view') && $req->view != null) {
 			return response()
 				->view($req->view)
 				->json([
@@ -55,7 +53,7 @@ class CookieController extends Controller
 		}
 
 		return response()->json([
-			'name' => $req->name,
+			'name' => $req->cookie_name,
 			'value' => $cookie
 		]);
 	}
