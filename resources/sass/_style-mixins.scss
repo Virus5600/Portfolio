@@ -44,60 +44,124 @@
 	}
 }
 
-@mixin breakpoint($key, $value, $attribute, $point:"none") {
+@mixin breakpoint($key, $value, $attribute, $point:"none", $valueKey:"none", $important:false) {
+	@if ($important==true) {
+		$important: '!important';
+	}
+	@else {
+		$important: '';
+	}
+
 	@if map.has-key($breakpoints, $point) and $point != "none" {
 		@if $point == "xs" or $point == "none" {
 			@include xs {
-				.#{$key}-#{$value},
-				.#{$key}-#{$point}-#{$value} {
-					#{$attribute}: #{$value};
+				@if $valueKey == "none" {
+					.#{$key}-#{$value},
+					.#{$key}-#{$point}-#{$value} {
+						#{$attribute}: #{$value} #{$important};
+					}
+				}
+				@else {
+					.#{$key}-#{$valueKey},
+					.#{$key}-#{$point}-#{$valueKey} {
+						#{$attribute}: #{$value} #{$important};
+					}
 				}
 			}
 		}
 		@else if $point == "sm" {
 			@include sm {
-				.#{$key}-#{$point}-#{$value} {
-					#{$attribute}: #{$value};
+				@if $valueKey == "none" {
+					.#{$key}-#{$point}-#{$value} {
+						#{$attribute}: #{$value} #{$important};
+					}
+				}
+				@else {
+					.#{$key}-#{$point}-#{$valueKey} {
+						#{$attribute}: #{$value} #{$important};
+					}
 				}
 			}
 		}
 		@else if $point == "md" {
 			@include md {
-				.#{$key}-#{$point}-#{$value} {
-					#{$attribute}: #{$value};
+				@if $valueKey == "none" {
+					.#{$key}-#{$point}-#{$value} {
+						#{$attribute}: #{$value} #{$important};
+					}
+				}
+				@else {
+					.#{$key}-#{$point}-#{$valueKey} {
+						#{$attribute}: #{$value} #{$important};
+					}
 				}
 			}
 		}
 		@else if $point == "lg" {
 			@include lg {
-				.#{$key}-#{$point}-#{$value} {
-					#{$attribute}: #{$value};
+				@if $valueKey == "none" {
+					.#{$key}-#{$point}-#{$value} {
+						#{$attribute}: #{$value} #{$important};
+					}
+				}
+				@else {
+					.#{$key}-#{$point}-#{$valueKey} {
+						#{$attribute}: #{$value} #{$important};
+					}
 				}
 			}
 		}
 		@else if $point == "xl" {
 			@include xl {
-				.#{$key}-#{$point}-#{$value} {
-					#{$attribute}: #{$value};
+				@if $valueKey == "none" {
+					.#{$key}-#{$point}-#{$value} {
+						#{$attribute}: #{$value} #{$important};
+					}
+				}
+				@else {
+					.#{$key}-#{$point}-#{$valueKey} {
+						#{$attribute}: #{$value} #{$important};
+					}
 				}
 			}
 		}
 		@else if $point == "xxl" {
 			@include xxl {
-				.#{$key}-#{$point}-#{$value} {
-					#{$attribute}: #{$value};
+				@if $valueKey == "none" {
+					.#{$key}-#{$point}-#{$value} {
+						#{$attribute}: #{$value} #{$important};
+					}
+				}
+				@else {
+					.#{$key}-#{$point}-#{$valueKey} {
+						#{$attribute}: #{$value} #{$important};
+					}
 				}
 			}
 		}
 		@else {
-			.#{$key}-#{$point}-#{$value} {
-				#{$attribute}: #{$value};
+			@if $valueKey == "none" {
+				.#{$key}-#{$point}-#{$value} {
+					#{$attribute}: #{$value} #{$important};
+				}
+			}
+			@else {
+				.#{$key}-#{$point}-#{$valueKey} {
+					#{$attribute}: #{$value} #{$important};
+				}
 			}
 		}
 	}
 	@else {
-		.#{$key}-#{$value} {
-			#{$attribute}: #{$value};
+		@if $valueKey == "none" {
+			.#{$key}-#{$value} {
+				#{$attribute}: #{$value} #{$important};
+			}
+		}
+		@else {
+			.#{$key}-#{$valueKey} {
+				#{$attribute}: #{$value} #{$important};
+			}
 		}
 	}
 }

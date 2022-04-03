@@ -4,6 +4,16 @@
 	font-style: normal;
 }
 
-.font-nasalization-rg {
+.font-nasalization {
 	font-family: Nasalization;
+}
+
+.font-nasalization-bold {
+	font-family: Nasalization;
+	font-weight: bold;
+}
+
+.font-nasalization-italic {
+	font-family: Nasalization;
+	font-style: italic;
 }

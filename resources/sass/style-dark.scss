@@ -7,6 +7,6 @@
 // BG COLORS
 @each $color, $value in $colors-dark {
 	.bg-#{$color} {
-		background-color: $value;
+		background-color: $value !important;
 	}
 }

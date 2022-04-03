@@ -82,8 +82,10 @@
 
 		{{-- Custom CSS --}}
 		{{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
-		<link rel="stylesheet" type="text/css" href="{{ mix('css/style-' . (Cookie::get('is_dark') === 'true' ? 'dark' : 'light') . '.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ mix('css/style-' . (Cookie::get('is_dark') === 'true' ? 'dark' : 'light') . '.css') }}" id="theme">
 		<link rel="stylesheet" type="text/css" href="{{ mix('css/style-general.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/custom/keyframes.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/custom/general.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/custom/user.css') }}">
 		@yield('css')
 
@@ -93,7 +95,7 @@
 		<title>{{ env('APP_NAME') }} | @yield('title')</title>
 	</head>
 
-	<body>
+	<body class="min-vh-100 bg-{{(Cookie::get('is_dark') === 'true' ? 'dark' : 'white')}}">
 		{{-- SHOWS THIS INSTEAD WHEN JAVASCRIPT IS DISABLED --}}
 		<div style="position: absolute; height: 100vh; width: 100vw; background-color: #ccc;" id="js-disabled">
 			<style type="text/css">

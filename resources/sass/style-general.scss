@@ -7,7 +7,7 @@
 // BG COLORS
 @each $color, $value in $colors-general {
 	.bg-#{$color} {
-		background-color: $value;
+		background-color: $value !important;
 	}
 }
 
@@ -15,5 +15,16 @@
 @each $breakpoint, $value in $breakpoints {
 	@each $value in $cursor-general {
 		@include breakpoint("cursor", $value, "cursor", $breakpoint);
+	}
+}
+
+// COLLAPSE-WIDTH
+@include breakpoint("collapse", "width .35s ease", "transition", "none", "width.collapsing", true);
+
+// TRANSITION
+// $key, $value, $attribute, $point:"none", $valueKey:"none", $important:false
+@each $i, $time in $transition-duration {
+	@each $key, $value in $transition-easing {
+		@include breakpoint("transition", #{$value} #{$time} , "transition", "none", #{$i}-#{$key});
 	}
 }

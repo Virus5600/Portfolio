@@ -1,4 +1,4 @@
-const cookies = {
+const V_COOKIES = {
 	set: function(cookie_name, cookie_val, minutes = 0, callback = null, view = null) {
 		$.post('/cookie/set', {
 			_token: $('meta[name=_token]').attr('content'),

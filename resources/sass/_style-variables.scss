@@ -63,3 +63,21 @@ $cursor-general: (
 	zoom-in,
 	zoom-out
 ) !default;
+
+////////////////
+// TRANSITION //
+////////////////
+$transition-duration: (
+	d1: .125s,
+	d2: .25s,
+	d3: .375s,
+	d4: .5s,
+	d5: .75s
+);
+
+$transition-easing: (
+	e-in: ease-in,
+	e-out: ease-out,
+	e-in-out: ease-in-out,
+	jump: cubic-bezier(.75, 0.0, 0.375, 3)
+);
