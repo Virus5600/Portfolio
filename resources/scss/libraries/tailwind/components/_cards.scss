@@ -1,0 +1,130 @@
+@use "sass:color" as *;
+
+@use "./../../../variables/variables" as *;
+
+@layer components {
+	.card-group {
+		@apply flex flex-row flex-wrap;
+
+		& > .card {
+			@apply mb-0 grow-[1] shrink-0 basis-[0%];
+
+			&:not(:first-child) {
+				@apply rounded-l-none;
+
+				.card-header,
+				.card-footer {
+					@apply rounded-l-none;
+				}
+			}
+
+			&:not(:last-child) {
+				@apply rounded-r-none;
+
+				.card-header,
+				.card-footer {
+					@apply rounded-r-none;
+				}
+			}
+
+			& + .card {
+				@apply ml-0 border-l-0;
+			}
+
+			&.card-horizontal {
+				@apply flex-col;
+			}
+		}
+	}
+
+	.card {
+		@apply relative flex flex-col min-w-0 min-h-0 break-words bg-clip-border;
+		@apply border dark:border-[#fff]/[0.15] border-gray-700/[0.15] rounded-lg;
+		@apply text-inherit;
+		@apply transition-all duration-[125ms] ease-in-out;
+
+		&,
+		[data-tw-theme="dark"] & {
+			background-color: adjust($background-dark, $lightness: 5%);
+		}
+		[data-tw-theme="light"] & {
+			background-color: $background;
+		}
+
+		&.hoverable {
+			@apply hover:scale-[1.025] hover:shadow-lg;
+		}
+
+		&.card-horizontal {
+			@apply flex-row;
+		}
+
+		.card-header {
+			@apply mb-0 px-2 py-4 text-2xl font-bold tracking-tight;
+
+			&,
+			[data-tw-theme="dark"] & {
+				background-color: adjust($background-dark, $lightness: 7.5%);
+			}
+			[data-tw-theme="light"] & {
+				background-color: adjust($background, $lightness: -3%);
+			}
+
+			&:first-child {
+				@apply rounded-t-lg;
+			}
+			&:last-child {
+				@apply rounded-b-lg;
+			}
+		}
+
+		.card-body {
+			@apply p-4 flex-auto;
+		}
+
+		.card-title {
+			@apply mb-2;
+		}
+
+		.card-text {
+			@apply mt-0 mb-4;
+		}
+
+		.card-footer {
+			@apply px-2 py-4;
+			@apply border-t border-solid border-[#fff]/[0.15];
+
+			&:first-child {
+				@apply rounded-t-lg;
+			}
+			&:last-child {
+				@apply rounded-b-lg;
+			}
+
+			&,
+			[data-tw-theme="dark"] & {
+				background-color: adjust($background-dark, $lightness: 7.5%);
+			}
+			[data-tw-theme="light"] & {
+				background-color: adjust($background, $lightness: -3%);
+			}
+		}
+
+		.card-image {
+			@apply w-full;
+
+			.card-image-top {
+				@apply rounded-t-lg;
+			}
+
+			.card-image-bottom {
+				@apply rounded-b-lg;
+			}
+		}
+
+		& > .card-image-overlay {
+			@apply absolute top-0 right-0 bottom-0 left-0 p-4;
+			@apply rounded-lg;
+		}
+	}
+}

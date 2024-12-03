@@ -1,0 +1,22 @@
+*:target {
+	scroll-margin-top: calc(1rem + var(--navbar-height));
+}
+
+.required-after,
+.required-end {
+	&:after {
+		margin-left: 0.25rem;
+		content: "*";
+		color: var(--required-color);
+	}
+}
+
+.required,
+.required-before,
+.required-start {
+	&:before {
+		margin-right: 0.25rem;
+		content: "*";
+		color: var(--required-color);
+	}
+}

@@ -1,0 +1,78 @@
+// Tailwind CSS
+@use "./tailwind.css";
+
+// Variables
+@use "./../../variables/variables" as *;
+
+// Tailwind Components
+@use "./components/cards";
+
+@layer base {
+	:root {
+		// Theme Colors
+		--tw-success: #{$success};
+		--tw-warning: #{$warning};
+		--tw-error: #{$error};
+		--tw-info: #{$info};
+
+		// Navbar Height
+		--navbar-height: 3.5rem;
+
+		// For the "Rrequired" marker
+		--required-color: var(--tw-error);
+
+		// RGB VALUES //
+		// Theme Colors
+		--tw-rgb-success: #{$success-rgb};
+		--tw-rgb-warning: #{$warning-rgb};
+		--tw-rgb-error: #{$error-rgb};
+		--tw-rgb-info: #{$info-rgb};
+	}
+	:root,
+	[data-tw-theme="dark"] {
+		// Theme Colors
+		--tw-primary: #{$primary-dark};
+		--tw-secondary: #{$secondary-dark};
+		--tw-accent: #{$accent-dark};
+
+		// Default Colors
+		--tw-color: #{$text-dark};
+		--tw-bg: #{$background-dark};
+
+		// RGB VALUES //
+		// Theme Colors
+		--tw-rgb-primary: #{$primary-dark-rgb};
+		--tw-rgb-secondary: #{$secondary-dark-rgb};
+		--tw-rgb-accent: #{$accent-dark-rgb};
+
+		// Default Colors
+		--tw-rgb-color: #{$text-dark-rgb};
+		--tw-rgb-bg: #{$background-dark-rgb};
+	}
+
+	[data-tw-theme="light"] {
+		// Theme Colors
+		--tw-primary: #{$primary};
+		--tw-secondary: #{$secondary};
+		--tw-accent: #{$accent};
+
+		// Default Colors
+		--tw-color: #{$text};
+		--tw-bg: #{$background};
+
+		// RGB VALUES //
+		// Theme Colors
+		--tw-rgb-primary: #{$primary-rgb};
+		--tw-rgb-secondary: #{$secondary-rgb};
+		--tw-rgb-accent: #{$accent-rgb};
+
+		// Default Colors
+		--tw-rgb-color: #{$text-rgb};
+		--tw-rgb-bg: #{$background-rgb};
+	}
+
+	html {
+		color: var(--tw-color);
+		background-color: var(--tw-bg);
+	}
+}

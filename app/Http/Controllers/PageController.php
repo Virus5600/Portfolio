@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\CookieController as CC;
-
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-use Cookie;
-use Log;
-
+/**
+ * The controller for the website's uncategorized pages. This includes the following:
+ * - The main page `index` (`/`)
+ */
 class PageController extends Controller
 {
-	protected function index(Request $req) {
-		$isGame = CC::get('is_game')->getData()->value ? CC::get('is_game')->getData()->value : 'false';
-		
-		return view('index', [
-			'isGame' => $isGame,
-		]);
+	/**
+	 * Shows the website's main page. This is also the landing page and the default page
+	 * when the user visits the website.
+	 *
+	 * @param Request $req The request object
+	 *
+	 * @return View The view to be displayed
+	 */
+    public function index(): View
+	{
+		return view('index');
 	}
 }

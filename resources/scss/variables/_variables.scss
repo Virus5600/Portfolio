@@ -1,0 +1,51 @@
+// PREFIX
+$prefix: tw- !default;
+
+// THEME COLORS //
+// General Theme
+$success: #15803d;
+$warning: #ffb300;
+$error: #dc2828;
+$info: #00bbff;
+
+// RGB values
+$success-rgb: 21 128 61;
+$warning-rgb: 255 179 0;
+$error-rgb: 220 40 40;
+$info-rgb: 0 187 255;
+
+// Light Theme
+$primary: #3a31d8;
+$secondary: #dddbff;
+$accent: #443dff;
+
+$primary-rgb: 58 49 216;
+$secondary-rgb: 221 219 255;
+$accent-rgb: 68 61 255;
+
+// Dark Theme
+$primary-dark: #2f27ce;
+$secondary-dark: #020024;
+$accent-dark: #0600c2;
+
+$primary-dark-rgb: 47 39 206;
+$secondary-dark-rgb: 2 0 36;
+$accent-dark-rgb: 6 0 194;
+
+// DEFAULT COLORS //
+// Light Theme
+$text: #040506;
+$background: #e4e4e7;
+
+$text-rgb: 4 5 6;
+$background-rgb: 228 228 231;
+
+// Dark Theme
+$text-dark: #f9fafb;
+$background-dark: #18181b;
+
+$text-dark-rgb: 249 250 251;
+$background-dark-rgb: 24 24 27;
+
+// NOTE: The text and background colors are just swapped between the light and dark themes.
+// Both colors are Gray-50 (light) and Zinc-900 (dark).

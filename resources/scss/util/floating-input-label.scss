@@ -1,0 +1,85 @@
+$vendors: (
+	":-webkit",
+	":-moz",
+	"-mos",
+	":-ms",
+	"-ms"
+);
+
+// The floating label container
+.floating-label-wrapper {
+	position: relative;
+	padding-top: 1.5rem;
+
+	// Floating label default state
+	label.form-label:has(~ input, ~ textarea, ~ * input, ~ * textarea) {
+		z-index: 0;
+		margin: 0;
+
+		cursor: text;
+		opacity: 0.75;
+		transition: .125s ease-in-out;
+
+		position: absolute;
+		top: 1.875rem;
+		left: .75rem;
+
+		// Actual input and textarea elements styling
+		~ input, ~ textarea, ~ *:has(input, textarea) {
+			position: relative;
+			z-index: 1;
+		}
+
+		// Placeholder styling (Show placeholder)
+		~ input, ~ textarea, ~ * input, ~ * textarea {
+			&::placeholder {
+				transition: .125s ease-in-out;
+				color: var(--placeholder-color);
+			}
+
+			@each $v in $vendors {
+				@if (& == input or & == textarea) {
+					#{$v}-input-placeholder {
+						transition: .125s ease-in-out;
+						color: var(--placeholder-color);
+					}
+				}
+			}
+		}
+
+		// Placeholder styling (Hide placeholder)
+		~ input:focus, ~ textarea:focus,
+		~ * input:focus, ~ * textarea:focus,
+		~ input:not(:placeholder-shown), ~ textarea:not(:placeholder-shown),
+		~ * input:not(:placeholder-shown), ~ * textarea:not(:placeholder-shown) {
+			&::placeholder {
+				color: transparent;
+				opacity: 0;
+			}
+
+			@each $v in $vendors {
+				@if (& == input or & == textarea) {
+					#{$v}-input-placeholder {
+						color: transparent;
+						opacity: 0;
+					}
+				}
+			}
+		}
+	}
+
+	// Floating label active state
+	label.form-label:has(
+		~ input:focus, ~ textarea:focus,
+		~ * input:focus, ~ * textarea:focus,
+		~ input:not(:placeholder-shown), ~ textarea:not(:placeholder-shown),
+		~ * input:not(:placeholder-shown), ~ * textarea:not(:placeholder-shown)
+		) {
+		z-index: 2;
+		cursor: default;
+		opacity: 1;
+
+		top: 0rem;
+		left: .125rem;
+	}
+}

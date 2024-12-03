@@ -1,0 +1,10 @@
+// Sweetalert 2
+@use "node_modules/sweetalert2/dist/sweetalert2";
+
+button.swal2-styled {
+	&.override-style {
+		color: var(--override-color);
+		background-color: var(--override-bg);
+		border-color: var(--override-border);
+	}
+}

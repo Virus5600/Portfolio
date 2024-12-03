@@ -1,0 +1,3 @@
+php artisan make:component Directory/ComponentName --phpunit --view
+php artisan make:model ModelName -cfms [--api] --phpunit
+php artisan make:policy PolicyName -m ModelName

@@ -1,0 +1,15 @@
+// Font Awesome 6
+@use "./libraries/fontawesome";
+
+// Normalize CSS
+@use "./libraries/normalize";
+
+// Tailwind CSS
+@use "./libraries/tailwind/tailwind";
+
+// SweetAlert2
+@use "./libraries/swal";
+
+// Components
+@use "./components/common";
+@use "./components/fonts";

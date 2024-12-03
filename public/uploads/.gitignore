@@ -1,0 +1,7 @@
+*
+
+!.gitignore
+!**/default*
+
+# Folders
+!settings/
