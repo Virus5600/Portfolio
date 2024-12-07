@@ -11,7 +11,7 @@ import "./libs/fontawesome";
 import "./libs/swal";
 
 // Flowbite
-import "./libs/flowbite";
+import "./libs/flowbite/index";
 
 // Tailwind Theme Selector
 import "./tw-theme-selector";

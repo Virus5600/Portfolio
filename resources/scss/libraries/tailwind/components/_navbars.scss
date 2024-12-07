@@ -1,0 +1,135 @@
+@layer components {
+	.navbar {
+		@apply relative flex flex-wrap;
+		@apply items-center justify-between;
+		@apply px-0 py-2;
+		@apply min-h-[var(--navbar-height)];
+		@apply bg-[var(--navbar-bg)] text-[var(--tw-color)] shadow-md;
+
+		&.navbar-expand {
+			@apply flex-nowrap justify-start;
+
+			.navbar-toggler {
+				@apply hidden;
+			}
+
+			.navbar-collapse {
+				--max-collapse-height: 100%;
+
+				@apply block w-auto h-[unset];
+
+				&.collapse {
+					@apply max-h-[var(--max-collapse-height)] visible;
+				}
+			}
+
+			.navbar-nav {
+				@apply flex-row;
+
+				& > .nav-item {
+					& > .nav-link {
+						@apply px-2;
+					}
+				}
+			}
+		}
+
+		& > .navbar-contents {
+			@apply flex;
+			flex-wrap: inherit;
+			@apply items-center justify-between;
+			@apply w-full px-3;
+		}
+
+		// For Collapsing Navbars
+		.navbar-collapse {
+			@apply w-full max-h-[var(--max-collapse-height)] overflow-hidden;
+			@apply transition-all duration-[250ms] ease-in-out;
+			@apply bg-[var(--navbar-bg)];
+
+			&.collapse {
+				@apply max-h-0;
+			}
+		}
+		// For Drawer Navbars
+		.navbar-drawer {
+			@apply fixed top-0 z-40 h-screen overflow-y-auto w-64;
+			@apply transition-transform transform ease-in-out duration-[250ms];
+			@apply bg-[var(--navbar-bg)];
+
+			&:not(.right-drawer) {
+				@apply left-0;
+				@apply -translate-x-full;
+			}
+
+			&.right-drawer {
+				@apply right-0;
+				@apply translate-x-full;
+			}
+
+			&.transform-none {
+				@apply translate-x-0;
+			}
+
+			.nav-item {
+				@apply px-4;
+			}
+		}
+
+		.navbar-brand {
+			@apply px-4 py-[.375rem] mr-4;
+			@apply text-xl leading-normal text-[var(--tw-color)] no-underline whitespace-nowrap;
+
+			& > img,
+			& > svg {
+				@apply inline-block align-middle;
+			}
+		}
+
+		.navbar-toggler {
+			@apply px-3 py-1;
+			@apply text-xl leading-none;
+			@apply bg-transparent text-[var(--tw-border-color)];
+			@apply border border-solid border-[var(--tw-border-color)] rounded-md;
+
+			&[aria-expanded="true"],
+			&[data-drawer-status="visible"] {
+				.hamburger-menu,
+				.navbar-toggler-icon {
+					@apply rotate-90;
+				}
+			}
+		}
+
+		.navbar-nav {
+			@apply flex flex-col;
+			@apply font-medium;
+
+			& > .nav-item {
+				& > .nav-link {
+					@apply block px-0 py-2;
+					@apply transition-colors duration-150 ease-in-out;
+
+					&:not(.disabled, [disabled]) {
+						@apply hover:text-[var(--tw-hover-color)];
+					}
+				}
+			}
+		}
+	}
+
+	.hamburger-menu,
+	.navbar-toggler-icon {
+		&:not(.custom-icon) {
+			background: var(--navbar-toggler-icon) no-repeat center 100%;
+		}
+
+		&.custom-icon {
+			@apply flex items-center justify-center;
+		}
+
+		@apply inline-block w-6 h-6 align-middle;
+		@apply transform transition-transform duration-150 origin-center;
+		@apply bg-transparent text-text/[62.5%];
+	}
+}

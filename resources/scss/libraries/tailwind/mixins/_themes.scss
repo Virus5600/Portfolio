@@ -1,0 +1,72 @@
+// Variables
+@use "./../../../variables" as *;
+
+@mixin dark {
+	color-scheme: dark;
+
+	// Theme Colors
+	--tw-primary: #{$primary-dark};
+	--tw-secondary: #{$secondary-dark};
+	--tw-accent: #{$accent-dark};
+
+	// Default Colors
+	--tw-color: #{$text-dark};
+	--tw-bg: #{$background-dark};
+
+	// Navbar Colors
+	--navbar-bg: #{$navbar-bg-dark};
+
+	// Hamburger Menu Icon
+	--navbar-toggler-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+	// RGB VALUES //
+	// Theme Colors
+	--tw-rgb-primary: #{$primary-dark-rgb};
+	--tw-rgb-secondary: #{$secondary-dark-rgb};
+	--tw-rgb-accent: #{$accent-dark-rgb};
+
+	// Default Colors
+	--tw-rgb-color: #{$text-dark-rgb};
+	--tw-rgb-bg: #{$background-dark-rgb};
+
+	--tw-hover-color: #{$text-hover-dark};
+	--tw-rgb-hover-color: #{$text-hover-dark-rgb};
+
+	--tw-border-color: rgb(#{$border-color-rgb-dark} / 15%);
+	--tw-rgb-border-color: #{$border-color-rgb-dark} / 15%;
+}
+
+@mixin light {
+	color-scheme: light;
+
+	// Theme Colors
+	--tw-primary: #{$primary};
+	--tw-secondary: #{$secondary};
+	--tw-accent: #{$accent};
+
+	// Navbar Colors
+	--navbar-bg: #{$navbar-bg};
+
+	// Hamburger Menu Icon
+	--navbar-toggler-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+	// Default Colors
+	--tw-color: #{$text};
+	--tw-bg: #{$background};
+
+	// RGB VALUES //
+	// Theme Colors
+	--tw-rgb-primary: #{$primary-rgb};
+	--tw-rgb-secondary: #{$secondary-rgb};
+	--tw-rgb-accent: #{$accent-rgb};
+
+	// Default Colors
+	--tw-rgb-color: #{$text-rgb};
+	--tw-rgb-bg: #{$background-rgb};
+
+	--tw-hover-color: #{$text-hover};
+	--tw-rgb-hover-color: #{$text-hover-rgb};
+
+	--tw-border-color: rgb(#{$border-color-rgb} / 15%);
+	--tw-rgb-border-color: #{$border-color-rgb} / 15%;
+}

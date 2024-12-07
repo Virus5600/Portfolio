@@ -1,3 +1,5 @@
+@use "./../functions/colors" as *;
+
 // PREFIX
 $prefix: tw- !default;
 
@@ -15,37 +17,55 @@ $error-rgb: 220 40 40;
 $info-rgb: 0 187 255;
 
 // Light Theme
-$primary: #3a31d8;
-$secondary: #dddbff;
-$accent: #443dff;
+$primary: #7491e7;
+$secondary: #d5d5d8;
+$accent: #5ca5ed;
 
-$primary-rgb: 58 49 216;
-$secondary-rgb: 221 219 255;
-$accent-rgb: 68 61 255;
+$primary-rgb: 116 145 231;
+$secondary-rgb: 213 213 216;
+$accent-rgb: 92 165 237;
 
 // Dark Theme
-$primary-dark: #2f27ce;
-$secondary-dark: #020024;
-$accent-dark: #0600c2;
+$primary-dark: #1e40af;
+$secondary-dark: #050b1f;
+$accent-dark: #002dc2;
 
-$primary-dark-rgb: 47 39 206;
-$secondary-dark-rgb: 2 0 36;
-$accent-dark-rgb: 6 0 194;
+$primary-dark-rgb: 30 64 175;
+$secondary-dark-rgb: 5 11 31;
+$accent-dark-rgb: 0 45 194;
 
 // DEFAULT COLORS //
+
+/*
+ * NOTE: The text and background colors' base (dark theme) values are from the
+ * colors Gray-50 (light) and Zinc-800 (dark). The light theme's values are
+ * derived from the dark theme's values.
+ */
+// TEXT & BACKGROUND COLORS //
 // Light Theme
 $text: #040506;
-$background: #e4e4e7;
+$text-rgb: extractRGB($text);
 
-$text-rgb: 4 5 6;
-$background-rgb: 228 228 231;
+$text-hover: lighten($text, 37.5%);
+$text-hover-rgb: extractRGB($text-hover);
 
+$background: #d5d5d8;
+$background-rgb: extractRGB($background);
 // Dark Theme
 $text-dark: #f9fafb;
-$background-dark: #18181b;
+$text-dark-rgb: extractRGB($text-dark);
 
-$text-dark-rgb: 249 250 251;
-$background-dark-rgb: 24 24 27;
+$text-hover-dark: darken($text-dark, 25%);
+$text-hover-dark-rgb: extractRGB($text-hover-dark);
 
-// NOTE: The text and background colors are just swapped between the light and dark themes.
-// Both colors are Gray-50 (light) and Zinc-900 (dark).
+$background-dark: #27272a;
+$background-dark-rgb: extractRGB($background-dark);
+
+// BORDER COLORS //
+// Light Theme
+$border-color: #374151;
+$border-color-rgb: extractRGB($border-color);
+
+// Dark Theme
+$border-color-dark: #d1d5db;
+$border-color-rgb-dark: extractRGB($border-color-dark);

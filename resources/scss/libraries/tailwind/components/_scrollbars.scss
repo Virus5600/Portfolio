@@ -1,0 +1,136 @@
+@use "./../../../variables/scrollbars" as *;
+
+@layer base {
+	:root,
+	[data-tw-theme="dark"] {
+		--custom-scrollbar-color: #{$color};
+		--custom-scrollbar-hover: #{$hover};
+		--custom-scrollbar-active: #{$active};
+		--custom-scrollbar-bg: #{$scrollbar-bg};
+	}
+
+	[data-tw-theme="light"] {
+		--custom-scrollbar-color: #{$color-dark};
+		--custom-scrollbar-hover: #{$hover-dark};
+		--custom-scrollbar-active: #{$active-dark};
+		--custom-scrollbar-bg: #{$scrollbar-bg-dark};
+	}
+}
+
+/* CUSTOM SCROLLBAR */
+@layer components {
+	.custom-scrollbar {
+		&.scroll-bg-transparent {
+			--custom-scrollbar-bg: transparent;
+		}
+
+		/* Width */
+		&::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+
+			background-color: var(--custom-scrollbar-bg);
+		}
+
+		@each $radius in $scrollbar-radius {
+			.scroll-#{$radius} {
+				&::-webkit-scrollbar {
+					@apply #{$radius};
+				}
+			}
+		}
+
+		/* Button */
+		&::-webkit-scrollbar-button {
+			&:single-button {
+				display: block;
+				background-size: 6px;
+				background-repeat: no-repeat;
+				background-position: center;
+
+				width: 8px;
+				height: 8px;
+
+				&:vertical {
+					&:increment {
+						background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$color}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$color}' points='50,75 12.5,12.5 87.5,12.5'/></svg>");
+
+						&:hover {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$hover}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$hover}' points='50,75 12.5,12.5 87.5,12.5'/></svg>");
+						}
+						&:active {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$active}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$active}' points='50,75 12.5,12.5 87.5,12.5'/></svg>");
+						}
+					}
+
+					&:decrement {
+						background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$color}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$color}' points='50,25 12.5,87.5 87.5,87.5'/></svg>");
+
+						&:hover {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$hover}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$hover}' points='50,25 12.5,87.5 87.5,87.5'/></svg>");
+						}
+						&:active {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$active}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$active}' points='50,25 12.5,87.5 87.5,87.5'/></svg>");
+						}
+					}
+				}
+
+				&:horizontal {
+					&:increment {
+						background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$color}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$color}' points='75,50 12.5,87.5 12.5,12.5'/></svg>");
+
+						&:hover {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$hover}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$hover}' points='75,50 12.5,87.5 12.5,12.5'/></svg>");
+						}
+						&:active {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$active}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$active}' points='75,50 12.5,87.5 12.5,12.5'/></svg>");
+						}
+					}
+
+					&:decrement {
+						background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$color}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$color}' points='25,50 87.5,12.5 87.5,87.5'/></svg>");
+
+						&:hover {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$hover}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$hover}' points='25,50 87.5,12.5 87.5,87.5'/></svg>");
+						}
+						&:active {
+							background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#{$active}'><polygon stroke-linejoin='round' stroke-width='12.5' stroke='#{$active}' points='25,50 87.5,12.5 87.5,87.5'/></svg>");
+						}
+					}
+				}
+			}
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: var(--custom-scrollbar-color);
+			background-clip: padding-box;
+
+			border-radius: 10px;
+			border: 2px solid transparent;
+
+			/* Handle on hover */
+			&:hover {
+				background-color: var(--custom-scrollbar-hover);
+			}
+			/* Handle on active */
+			&:active {
+				background-color: var(--custom-scrollbar-active);
+			}
+		}
+
+		&::-webkit-scrollbar-corner {
+			background: var(--custom-scrollbar-bg);
+		}
+
+		/* APPLYING CUSTOM SB TO ALL */
+		&.apply-to-all * {
+			@extend .custom-scrollbar;
+
+			.scroll-bg-transparent {
+				--custom-scrollbar-bg: transparent;
+			}
+		}
+	}
+}
+/* CUSTOM SCROLLBAR END */

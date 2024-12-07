@@ -1,0 +1,14 @@
+@layer base {
+	body {
+		color: var(--tw-color);
+		background-color: var(--tw-bg);
+	}
+}
+
+@layer components {
+	:disabled,
+	.disabled {
+		@apply cursor-not-allowed opacity-50 pointer-events-none select-none;
+		@apply bg-gray-200 text-gray-500;
+	}
+}

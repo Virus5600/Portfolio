@@ -2,10 +2,12 @@
 @use "./tailwind.css";
 
 // Variables
-@use "./../../variables/variables" as *;
+@use "./../../variables" as *;
 
-// Tailwind Components
-@use "./components/cards";
+@use "./mixins/themes" as *;
+
+// Components
+@use "./components" as *;
 
 @layer base {
 	:root {
@@ -16,7 +18,7 @@
 		--tw-info: #{$info};
 
 		// Navbar Height
-		--navbar-height: 3.5rem;
+		--navbar-height: #{$navbar-height};
 
 		// For the "Rrequired" marker
 		--required-color: var(--tw-error);
@@ -28,51 +30,46 @@
 		--tw-rgb-error: #{$error-rgb};
 		--tw-rgb-info: #{$info-rgb};
 	}
-	:root,
+
+	// Dark Theme (Default)
+	.dark,
 	[data-tw-theme="dark"] {
-		// Theme Colors
-		--tw-primary: #{$primary-dark};
-		--tw-secondary: #{$secondary-dark};
-		--tw-accent: #{$accent-dark};
-
-		// Default Colors
-		--tw-color: #{$text-dark};
-		--tw-bg: #{$background-dark};
-
-		// RGB VALUES //
-		// Theme Colors
-		--tw-rgb-primary: #{$primary-dark-rgb};
-		--tw-rgb-secondary: #{$secondary-dark-rgb};
-		--tw-rgb-accent: #{$accent-dark-rgb};
-
-		// Default Colors
-		--tw-rgb-color: #{$text-dark-rgb};
-		--tw-rgb-bg: #{$background-dark-rgb};
+		@include dark;
 	}
 
-	[data-tw-theme="light"] {
-		// Theme Colors
-		--tw-primary: #{$primary};
-		--tw-secondary: #{$secondary};
-		--tw-accent: #{$accent};
-
-		// Default Colors
-		--tw-color: #{$text};
-		--tw-bg: #{$background};
-
-		// RGB VALUES //
-		// Theme Colors
-		--tw-rgb-primary: #{$primary-rgb};
-		--tw-rgb-secondary: #{$secondary-rgb};
-		--tw-rgb-accent: #{$accent-rgb};
-
-		// Default Colors
-		--tw-rgb-color: #{$text-rgb};
-		--tw-rgb-bg: #{$background-rgb};
+	// Light Theme
+	[data-tw-theme="light"],
+	.light {
+		@include light;
 	}
 
-	html {
-		color: var(--tw-color);
-		background-color: var(--tw-bg);
+	@media (prefers-color-scheme: dark) {
+		:root,
+		.dark,
+		[data-tw-theme="dark"] {
+			@include dark;
+		}
+
+		[data-tw-theme="light"],
+		.light {
+			@include light;
+		}
 	}
+	@media (prefers-color-scheme: light) {
+		:root,
+		[data-tw-theme="light"],
+		.light {
+			@include light;
+		}
+
+		.dark,
+		[data-tw-theme="dark"] {
+			@include dark;
+		}
+	}
+}
+
+html {
+	background-color: var(--tw-bg);
+	color: var(--tw-color);
 }

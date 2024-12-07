@@ -1,0 +1,53 @@
+@layer components {
+	// For grouping multiple inputs together
+	.input-group {
+		@apply flex flex-row p-0 border items-center border-solid border-[var(--tw-border-color)] rounded-lg;
+
+		& > * {
+			@apply border-0;
+		}
+
+		& > *:first-child {
+			@apply rounded-l-lg rounded-r-none border-r-0;
+		}
+		& > *:not(:first-child, :last-child) {
+			@apply rounded-l-none rounded-r-none;
+		}
+		& > *:last-child {
+			@apply rounded-r-lg rounded-l-none border-l;
+		}
+
+		& > .input-group-text {
+			@apply flex items-center py-2 px-4 text-center whitespace-nowrap;
+		}
+
+		& > .form-control {
+			@apply relative flex-[1_1_auto] w-[1%] min-w-0;
+		}
+	}
+
+	// For creating floating icons inside the input
+	.input-float {
+		@apply relative items-center;
+
+		.input-float-start,
+		.input-float-end {
+			@apply absolute inset-y-0 pointer-events-none text-sm;
+
+			&:is(.input-float-start) {
+				@apply start-0 ps-3.5;
+			}
+
+			&:is(.input-float-end) {
+				@apply end-0 pe-3.5;
+			}
+		}
+
+		&:has(.input-float-start) .form-control {
+			@apply ps-10;
+		}
+		&:has(.input-float-end) .form-control {
+			@apply pe-10;
+		}
+	}
+}

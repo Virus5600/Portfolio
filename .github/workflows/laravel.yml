@@ -16,7 +16,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_DATABASE: portfolio-system
+          MYSQL_DATABASE: portfolio-test
           MYSQL_ROOT_PASSWORD: password
         ports:
           - 3306/tcp
@@ -87,3 +87,4 @@ jobs:
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
         run: php artisan test --coverage-text --coverage
+

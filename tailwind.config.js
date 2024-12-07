@@ -6,11 +6,12 @@ import flowbite from "flowbite/plugin";
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: [
+		'./node_modules/flowbite/**/*.js',
 		'./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
 		'./storage/framework/views/*.php',
 		'./resources/views/**/*.blade.php',
-		'./resources/views/**/*.js.php',
-		'./resources/views/**/*.scss.php',
+		'./resources/js/**/*.js',
+		'./resources/scss/**/*.scss',
 	],
 	theme: {
 		extend: {
@@ -30,7 +31,7 @@ export default {
 			warning: 'rgb(var(--tw-rgb-warning) / <alpha-value>)',
 			info: 'rgb(var(--tw-rgb-info) / <alpha-value>)',
 
-			text: 'rgb(var(--tw-rgb-text) / <alpha-value>)',
+			text: 'rgb(var(--tw-rgb-color) / <alpha-value>)',
 			body: 'rgb(var(--tw-rgb-bg) / <alpha-value>)',
 		}
 	},

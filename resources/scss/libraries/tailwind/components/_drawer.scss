@@ -1,0 +1,14 @@
+.drawer,
+.navbar-drawer {
+	~ .drawer-backdrop {
+		@apply fixed inset-0 z-30;
+		@apply bg-gray-900/50;
+	}
+}
+
+.drawer-backdrop {
+	&:has(~ .drawer, ~ .navbar-drawer) {
+		@apply fixed inset-0 z-30;
+		@apply bg-gray-900/50;
+	}
+}

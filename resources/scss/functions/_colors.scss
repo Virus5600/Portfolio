@@ -1,0 +1,17 @@
+@use "sass:color" as *;
+
+@function darken($color, $amount) {
+	@return adjust-color($color, $lightness: -($amount));
+}
+
+@function lighten($color, $amount) {
+	@return adjust-color($color, $lightness: $amount);
+}
+
+@function extractRGB($color) {
+	@return red($color) green($color) blue($color);
+}
+
+@function extractRGBA($color, $alpha) {
+	@return rgba(red($color), green($color), blue($color), $alpha);
+}

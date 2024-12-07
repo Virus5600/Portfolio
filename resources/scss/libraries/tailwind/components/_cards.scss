@@ -1,5 +1,3 @@
-@use "sass:color" as *;
-
 @use "./../../../variables/variables" as *;
 
 @layer components {
@@ -39,17 +37,10 @@
 
 	.card {
 		@apply relative flex flex-col min-w-0 min-h-0 break-words bg-clip-border;
-		@apply border dark:border-[#fff]/[0.15] border-gray-700/[0.15] rounded-lg;
+		@apply border border-[var(--tw-border-color)] rounded-lg;
 		@apply text-inherit;
+		@apply bg-body text-text;
 		@apply transition-all duration-[125ms] ease-in-out;
-
-		&,
-		[data-tw-theme="dark"] & {
-			background-color: adjust($background-dark, $lightness: 5%);
-		}
-		[data-tw-theme="light"] & {
-			background-color: $background;
-		}
 
 		&.hoverable {
 			@apply hover:scale-[1.025] hover:shadow-lg;
@@ -61,14 +52,8 @@
 
 		.card-header {
 			@apply mb-0 px-2 py-4 text-2xl font-bold tracking-tight;
-
-			&,
-			[data-tw-theme="dark"] & {
-				background-color: adjust($background-dark, $lightness: 7.5%);
-			}
-			[data-tw-theme="light"] & {
-				background-color: adjust($background, $lightness: -3%);
-			}
+			@apply border-b border-solid border-[var(--tw-border-color)];
+			@apply bg-body text-text;
 
 			&:first-child {
 				@apply rounded-t-lg;
@@ -80,6 +65,7 @@
 
 		.card-body {
 			@apply p-4 flex-auto;
+			@apply overflow-auto;
 		}
 
 		.card-title {
@@ -92,21 +78,14 @@
 
 		.card-footer {
 			@apply px-2 py-4;
-			@apply border-t border-solid border-[#fff]/[0.15];
+			@apply border-t border-solid border-[var(--tw-border-color)];
+			@apply bg-body text-text;
 
 			&:first-child {
 				@apply rounded-t-lg;
 			}
 			&:last-child {
 				@apply rounded-b-lg;
-			}
-
-			&,
-			[data-tw-theme="dark"] & {
-				background-color: adjust($background-dark, $lightness: 7.5%);
-			}
-			[data-tw-theme="light"] & {
-				background-color: adjust($background, $lightness: -3%);
 			}
 		}
 
