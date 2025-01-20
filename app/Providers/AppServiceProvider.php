@@ -13,9 +13,26 @@ use BadMethodCallException;
 use Exception;
 use URL;
 use Validator;
+use Vite;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+	/**
+	 * Defines the list of environments where the application is considered to be in development
+	 * and should have certain features enabled. So far, the following environments are considered
+	 * as development environments:
+	 * - `local`
+	 * - `development`
+	 * - `testing`
+	 *
+	 * @var array
+	 */
+	const DEV_ENV = [
+		'local',
+		'development',
+		'testing'
+	];
 
 	/**
 	 * A list of custom Faker classes to be implemented.
@@ -40,7 +57,12 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function register(): void
 	{
-		if (in_array(strtolower(config('app.env')), ['local', 'testing'])) {
+		// If the APP_URL starts with 'https://', then force HTTPS.
+		if (Str::startsWith(config('app.url'), 'https://')) {
+			$this->app['request']->server->set('HTTPS', true);
+		}
+
+		if (in_array(strtolower(config('app.env')), self::DEV_ENV)) {
 			// New Faker Methods
 			$this->implementFakeMethods();
 
@@ -58,18 +80,21 @@ class AppServiceProvider extends ServiceProvider
 		// Sets Tailwind CSS as the default pagination styling.
 		Paginator::useTailwind();
 
+		// Sets the nonce for Vite and makes sure that the path is absolute (no domain).
+		Vite::useCspNonce(csp_nonce());
+		Vite::createAssetPathsUsing(fn(string $path) => "/{$path}");
+
 		// Implement Custom Rules
 		$this->implementCustomRules();
 
-		// Use HTTPS when not in testing or local/dev environment (forced).
-		$envArr = [
-			'local',
-			'development',
-			'testing'
-		];
-
-		if (!in_array(strtolower(config('app.env')), $envArr)) {
+		if (!in_array(strtolower(config('app.env')), self::DEV_ENV)) {
 			URL::forceHttps();
+		}
+
+		if (class_exists(\Barryvdh\Debugbar\Facades\Debugbar::class)) {
+			// Sets the CSP nonce for Debugbar.
+			Debugbar::getJavascriptRenderer()
+				->setCspNonce(csp_nonce());
 		}
 	}
 

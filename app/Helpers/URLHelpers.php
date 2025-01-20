@@ -23,9 +23,9 @@ if (!function_exists("extractQueryParams")) {
 	}
 }
 
-if (!function_exists("absRoute")) {
+if (!function_exists("relRoute")) {
 	/**
-	 * Generates an absolute URL for the given route, with the given parameters.
+	 * Generates a relative URL for the given route, with the given parameters.
 	 * If the route is not found, an empty string will be returned.
 	 *
 	 * @param string $route  The route to generate the URL for.
@@ -33,7 +33,7 @@ if (!function_exists("absRoute")) {
 	 *
 	 * @return string
 	 */
-	function absRoute(string $route, array $params = []): string
+	function relRoute(string $route, array $params = []): string
 	{
 		return route($route, $params, true);
 	}

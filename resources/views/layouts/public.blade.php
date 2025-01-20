@@ -2,7 +2,10 @@
 <html lang="en" class="scroll-smooth custom-scrollbar apply-to-all" data-tw-theme="none">
 	@include("templates.head", ["title" => $title ?? ""])
 
-	<body class="h-screen min-h-screen">
+	<body class="h-screen min-h-screen font-nasalization">
+
+		@include("templates.noscript")
+
 		<div class="container-fluid flex flex-col h-full">
 			@include("templates.navbar")
 

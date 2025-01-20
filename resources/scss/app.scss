@@ -4,11 +4,11 @@
 // Normalize CSS
 @use "./libraries/normalize";
 
-// Tailwind CSS
-@use "./libraries/tailwind/tailwind";
-
 // SweetAlert2
 @use "./libraries/swal";
+
+// Tailwind CSS
+@use "./libraries/tailwind/tailwind";
 
 // Components
 @use "./components/common";

@@ -1,6 +1,6 @@
 class DOS {
 	static #EVENTS = {
-		'click': new MouseEvent('click', {view: window}),
+		'click': new MouseEvent('click', { view: window }),
 		'submit': new SubmitEvent('submit')
 	};
 
@@ -39,6 +39,11 @@ class DOS {
 	#confirmLeaveSubmitted = false;
 
 	/**
+	 * Determines if the form is currently submitting. This is used to prevent multiple submissions.
+	 */
+	#isSubmitting = false;
+
+	/**
 	 * Creates an instance of DOS for a specified form.
 	 *
 	 * @param {HTMLElement|jQuery} form The form element to create an instance with.
@@ -47,13 +52,13 @@ class DOS {
 	 * 	DOS instances.
 	 */
 	constructor(form) {
-		if (form instanceof jQuery) {
+		if ((typeof jQuery != "undefined" && jQuery != null) && form instanceof jQuery) {
 			if (form.length > 1) {
 				toReturn = [];
 
 				for (let f of form)
 					if (f instanceof HTMLFormElement)
-						toReturn.push(DOM.create(f));
+						toReturn.push(DOM.getOrCreateInstance(f));
 
 				return toReturn;
 			}
@@ -76,10 +81,11 @@ class DOS {
 		this.#form['disableOnSubmit'] = this;
 
 		this.#submitBtn.addEventListener('click', (e) => {
-			if (!this.#hasConfirmLeave || this.#confirmLeaveSubmitted) {
-				this.#updateSubmitBtn();
+			if ((!this.#hasConfirmLeave || this.#confirmLeaveSubmitted) && !this.#isSubmitting) {
 				this.#checkFormValidity(e);
+				this.#updateSubmitBtn();
 				this.#confirmLeaveSubmitted = !this.#hasConfirmLeave;
+				this.#isSubmitting = true;
 			}
 		});
 
@@ -96,10 +102,11 @@ class DOS {
 			this.#form.classList.add(`needs-validation`);
 
 		// Store previous button content
-		this.#submitBtn.setAttribute(`data-dos-prev`, this.#submitBtn.innerHTML);
+		let previousContent = this.#submitBtn.innerHTML;
+		this.#submitBtn.setAttribute(`data-dos-prev`, previousContent);
 
 		// Update inner html to the designated action text and spinner`
-		let btnLabel = `<div class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></div> `,
+		let btnLabel = `<i class="fas fa-circle-notch fa-spin"></i> `,
 			isHtml = (this.#submitBtn.dataset['dos-is-html'] ?? false) === 'true',
 			matched = false;
 
@@ -198,8 +205,11 @@ class DOS {
 		// Makes all the form elements visible
 		this.#form.querySelectorAll(`select, input, textarea`)
 			.forEach((v) => {
-				v.dataset["dos-style"] = v.getAttribute('style');
-				v.dataset["dos-invisible"] = true;
+				if (v.hasAttribute('data-dos-style'))
+					v.setAttribute("data-dos-style", v.getAttribute('style'));
+
+				if (v.hasAttribute('data-dos-invisible'))
+					v.getAttribute("data-dos-invisible", true);
 
 				v.setAttribute('style', `${v.getAttribute('style')} visibility: visible!important; opacity: 1!important; display: block!important;`);
 			});
@@ -238,12 +248,14 @@ class DOS {
 	 * while restoring the elements visibility back to its default states.
 	 */
 	revertFormChanges() {
-		// If not, proceed to redo the earlier changes so button can be used to submit again
+		// If not, proceed to redo the earlier changes so button can be used to submit again (only if it's alread clicked.)
+		if (this.#submitBtn.getAttribute('data-dos-clicked') == 'false')
+			return;
 
 		// Reverts the submit button...
-		this.#submitBtn.innerHTML = this.#submitBtn.dataset["dos-prev"];
-		this.#submitBtn.innerHTML = this.#submitBtn.classList.remove(`disabled`, `cursor-default`);
-		this.#submitBtn.innerHTML = this.#submitBtn.setAttribute('data-dos-clicked', 'false');
+		this.#submitBtn.innerHTML = this.#submitBtn.getAttribute("data-dos-prev");
+		this.#submitBtn.classList.remove(`disabled`, `cursor-default`);
+		this.#submitBtn.setAttribute('data-dos-clicked', 'false');
 
 		// Reverts the form elements...
 		let invalids = this.#form.querySelectorAll(`:invalid:not(.dont-validate)`);
@@ -263,8 +275,8 @@ class DOS {
 			v.classList.remove('is-invalid');
 
 			let selectEl = v.closest('.form-control:not(.bootstrap-select > select)');
-			selectEl.classList.add('is-valid');
-			selectEl.classList.remove('is-invalid');
+			selectEl?.classList.add('is-valid');
+			selectEl?.classList.remove('is-invalid');
 		});
 
 		// Reverts the form itself...
@@ -288,6 +300,9 @@ class DOS {
 				v.removeAttribute('data-dos-invisible');
 				v.removeAttribute('data-dos-style');
 			});
+
+		// Let the form know that it's not submitting anymore
+		this.#isSubmitting = false;
 	}
 
 	/**
@@ -300,6 +315,13 @@ class DOS {
 	}
 
 	/**
+	 * Gets the current form state; whether it is submitting (`true`) or not (`false`).
+	 */
+	get isSubmitting() {
+		return this.#isSubmitting;
+	}
+
+	/**
 	 * Gets the instance of the DisableOnSubmit (DOS) class from the form.
 	 *
 	 * @param {HTMLFormElement} form The form to get the instance from.
@@ -309,6 +331,8 @@ class DOS {
 	 * @see create For creating a new instance
 	 */
 	static getInstance(form) {
+		if (form instanceof HTMLButtonElement || form instanceof HTMLInputElement)
+			form = form.closest('form');
 		return form['disableOnSubmit'];
 	}
 
@@ -354,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelectorAll(`form:not([data-dos-not-affected]) [type=submit][data-dos], form:not([data-dos-not-affected]) [data-dos-action]`)
 		.forEach((btn) => {
 			let form = btn.closest('form');
-			DOS.create(form);
+			DOS.getOrCreateInstance(form);
 		});
 
 	document.addEventListener('click', (e) => {
@@ -373,8 +397,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			let parentForm = target.closest('form');
 			if (!parentForm.hasAttribute('data-dos-not-affected')) {
-				DOS.create(parentForm);
+				DOS.getOrCreateInstance(parentForm);
 			}
 		}
 	});
+});
+
+// UMD Adapter
+var global = window || global;
+
+DOS = new Proxy(DOS, {
+	get: (target, prop) => {
+		if (prop in target)
+			return target[prop];
+		if (prop in DOS)
+			return DOS[prop];
+	}
+});
+
+global.document.addEventListener('DOMContentLoaded', () => {
+	global.DOS = DOS;
+
+	global.document.addEventListener("click", (e) => {
+		const obj = e.target;
+		const flash = obj.closest(`.swal-flash`)
+
+		if (flash && Swal.isVisible())
+			Swal.close();
+	});
+
+	(function (global, factory) {
+		typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+			typeof define === 'function' && define.amd ? define(factory) :
+				(global = global || self, global.DOS = factory());
+	}(this, function () {
+		"use strict";
+		return DOS;
+	}));
 });

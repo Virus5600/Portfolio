@@ -75,7 +75,7 @@ class ViewLayoutServiceProvider extends ServiceProvider
 	public function boot(): void
 	{
 		// Sets the nonce for the CSP when in dev/local environment.
-		if (in_array(strtolower(config('app.env')), ['local', 'testing'])) {
+		if (in_array(strtolower(config('app.env')), AppServiceProvider::DEV_ENV)) {
 			Debugbar::getJavascriptRenderer()->setCspNonce(csp_nonce());
 		}
 

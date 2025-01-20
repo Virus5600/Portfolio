@@ -5,3 +5,5 @@ php artisan make:view Directory/ViewName --phpunit
 
 npm run dev
 npm run build
+
+ngrok http https://portfolio.test --url=https://glad-cuddly-gelding.ngrok-free.app --host-header=rewrite

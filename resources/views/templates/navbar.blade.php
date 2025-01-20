@@ -1,6 +1,6 @@
 <nav class="navbar sticky top-0 bg-transparent shadow-none">
 	<div class="navbar-contents">
-		<a href="{{ absRoute('home') }}" class="navbar-brand">
+		<a href="{{ relRoute("home") }}" class="navbar-brand">
 			<img src="{{ $webLogo }}" class="h-8" alt="Flowbite Logo" />
 			{{ $webName }}
 		</a>
